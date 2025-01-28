@@ -2,8 +2,12 @@
 # exit on error
 set -o errexit
 
-cd secure-file-sharing/backend  # Navigate to the backend directory
+# Navigate to the backend directory
+cd secure-file-sharing/backend
+
+# Install dependencies
 python -m pip install -r requirements.txt
 
+# Collect static files and run migrations
 python manage.py collectstatic --no-input
 python manage.py migrate 
