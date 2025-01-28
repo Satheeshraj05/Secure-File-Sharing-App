@@ -5,13 +5,6 @@ set -o errexit
 # Navigate to the backend directory
 cd secure-file-sharing/backend
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'secure-file-sharing.onrender.com',
-    'your-custom-domain.com',
-]
-
 # Install dependencies
 python -m pip install -r requirements.txt
 
