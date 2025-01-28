@@ -6,8 +6,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'your-secret-key-here'
 
-# Get ALLOWED_HOSTS from environment variable
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+# Get ALLOWED_HOSTS from environment variable, with a default fallback
+ALLOWED_HOSTS = os.getenv(
+    'DJANGO_ALLOWED_HOSTS',
+    'localhost,127.0.0.1,secure-file-sharing-app-1.onrender.com,.onrender.com'
+).split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
