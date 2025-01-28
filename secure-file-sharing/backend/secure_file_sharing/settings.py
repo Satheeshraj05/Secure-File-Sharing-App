@@ -8,7 +8,7 @@ SECRET_KEY = 'your-secret-key-here'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'secure-file-sharing.onrender.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -124,10 +124,8 @@ SIMPLE_JWT = {
 
 CORS_ALLOW_ALL_ORIGINS = True  # For development only, change this in production
 CORS_ALLOWED_ORIGINS = [
+    "https://secure-file-sharing-frontend.vercel.app",  # Your Vercel frontend URL
     "http://localhost:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
 ]
 CORS_ALLOW_ALL_HEADERS = True
 CORS_ALLOW_CREDENTIALS = True
