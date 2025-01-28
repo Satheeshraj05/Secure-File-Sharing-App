@@ -8,7 +8,12 @@ cd secure-file-sharing/backend
 # Install dependencies
 python -m pip install -r requirements.txt
 
-# Collect static files and run migrations
-python manage.py collectstatic --no-input
-python manage.py migrate 
+# Create static directory if it doesn't exist
+mkdir -p static
+
+# Collect static files
+python manage.py collectstatic --no-input --clear
+
+# Run migrations
+python manage.py migrate
 
