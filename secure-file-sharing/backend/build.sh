@@ -10,8 +10,9 @@ python -m pip install -r requirements.txt
 
 # Create necessary directories
 mkdir -p staticfiles
+mkdir -p media
 
-# Collect static files with clear
+# Collect static files
 python manage.py collectstatic --no-input --clear
 
 # Run migrations

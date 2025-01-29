@@ -2,16 +2,20 @@ import os
 from pathlib import Path
 from datetime import timedelta
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'your-secret-key-here'
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-secret-key-here')
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 # Get ALLOWED_HOSTS from environment variable, with a default fallback
 ALLOWED_HOSTS = [
+    'secure-file-sharing-app-1.onrender.com',
     'localhost',
     '127.0.0.1',
-    'secure-file-sharing-app-1.onrender.com',
-    'secure-file-sharing-app-aaif-vert.vercel.app'
 ]
 
 INSTALLED_APPS = [
@@ -57,12 +61,46 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'secure_file_sharing.wsgi.application'
 
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "https://secure-file-sharing-app-aaif-vert.vercel.app",
+    "http://localhost:3000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# Remove CORS_ORIGIN_ALLOW_ALL as it can cause security issues
+# CORS_ORIGIN_ALLOW_ALL = True
+
+# Database
+# Use SQLite for development, consider PostgreSQL for production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Static files
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -84,11 +122,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-STATIC_URL = '/static/'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -126,28 +159,7 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-# CORS Configuration
-CORS_ALLOWED_ORIGINS = [
-    "https://secure-file-sharing-app-aaif-vert.vercel.app",  # Your Vercel frontend URL
-    "http://localhost:3000",
-    "https://secure-file-sharing-app-1.onrender.com"  # Your Render backend URL
-]
-
 # Additional CORS settings
-CORS_ALLOW_CREDENTIALS = True
-
-# You might need this for development
-CORS_ORIGIN_ALLOW_ALL = True  # Only use this temporarily for debugging
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 
 LOGGING = {
@@ -174,14 +186,8 @@ FILE_UPLOAD_HANDLERS = [
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 
-# Static files configuration
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 # Add this to ensure Django can find admin static files
 STATICFILES_DIRS = []
 
 # Use the simpler storage backend
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
-
-# Debug setting
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
