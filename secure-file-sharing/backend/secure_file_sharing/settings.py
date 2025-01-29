@@ -14,6 +14,8 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 # Get ALLOWED_HOSTS from environment variable, with a default fallback
 ALLOWED_HOSTS = [
     'secure-file-sharing-app-1.onrender.com',
+    'secure-file-sharing-backend.onrender.com',
+    'secure-file-sharing-app-aaif-vert.vercel.app',
     'localhost',
     '127.0.0.1',
 ]
@@ -69,7 +71,15 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -204,7 +214,7 @@ STATICFILES_DIRS = []
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Security settings
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = not DEBUG
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
