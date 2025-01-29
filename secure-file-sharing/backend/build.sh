@@ -18,3 +18,8 @@ python manage.py collectstatic --no-input --clear
 # Run migrations
 python manage.py migrate
 
+# Create superuser if needed (you'll need to set environment variables)
+if [ "$DJANGO_SUPERUSER_USERNAME" ] && [ "$DJANGO_SUPERUSER_EMAIL" ] && [ "$DJANGO_SUPERUSER_PASSWORD" ]; then
+    python manage.py createsuperuser --noinput
+fi
+
