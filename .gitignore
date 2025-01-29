@@ -1,32 +1,52 @@
+# macOS system files
 .DS_Store
-   # Node.js
-   node_modules/
-   npm-debug.log
-   yarn-error.log
 
-   # Python
-   __pycache__/
-   *.py[cod]
-   .Python
-   env/
-   venv/
-   .venv/
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log
+package-lock.json
+yarn.lock
 
-   # Environment variables
-   .env
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+venv/
+.venv/
 
-   # Django
-   *.sqlite3
-   staticfiles/
-   media/
+# Virtual environment tools
+pip-log.txt
+pip-delete-this-directory.txt
 
-   # Logs
-   *.log
+# Environment variables
+.env
+.env.local
+.env.*.local
 
-   # IDEs and editors
-   .idea/
-   .vscode/
-   *.sublime-workspace
+# Django
+*.sqlite3
+db.sqlite3
+staticfiles/
+media/
 
-   # Vercel
-   .vercel/
+# Logs and temp files
+*.log
+*.out
+*.pid
+*.seed
+*.bak
+*.swp
+*.swo
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-workspace
+*.swp
+*.swo
+
+# Vercel
+.vercel/

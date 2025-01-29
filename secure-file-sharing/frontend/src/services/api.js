@@ -30,16 +30,23 @@ export const uploadFile = async (file) => {
   const formData = new FormData()
   formData.append("file", file)
   
+  // Remove the default Content-Type header for file uploads
+  delete api.defaults.headers['Content-Type']
+  
   try {
     const response = await api.post("files/", formData, {
       headers: {
-        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
       }
     })
     return response
   } catch (error) {
     console.error("Upload error details:", error.response?.data)
     throw error
+  } finally {
+    // Restore the default Content-Type header
+    api.defaults.headers['Content-Type'] = 'application/json'
   }
 }
 export const downloadFile = (fileId) => 

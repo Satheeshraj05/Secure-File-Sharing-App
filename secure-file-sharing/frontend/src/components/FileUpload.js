@@ -12,7 +12,9 @@ const FileUpload = () => {
   const dispatch = useDispatch()
 
   const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0])
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0])
+    }
   }
 
   const handleUpload = async () => {
@@ -23,13 +25,14 @@ const FileUpload = () => {
 
     setUploading(true)
     try {
-      console.log("Selected file:", selectedFile) // Debug log
-      
       const response = await uploadFile(selectedFile)
       if (response?.data) {
         dispatch(addFile(response.data))
         setSelectedFile(null)
         setError("File uploaded successfully")
+        // Reset the file input
+        const fileInput = document.getElementById('raised-button-file')
+        if (fileInput) fileInput.value = ''
       }
     } catch (error) {
       console.error("File upload failed:", error.response?.data || error)
@@ -46,7 +49,13 @@ const FileUpload = () => {
 
   return (
     <div>
-      <input accept="*/*" style={{ display: "none" }} id="raised-button-file" type="file" onChange={handleFileSelect} />
+      <input 
+        accept="*/*" 
+        style={{ display: "none" }} 
+        id="raised-button-file" 
+        type="file" 
+        onChange={handleFileSelect}
+      />
       <label htmlFor="raised-button-file">
         <Button variant="contained" component="span" startIcon={<CloudUpload />}>
           Select File
@@ -62,12 +71,17 @@ const FileUpload = () => {
         color="primary"
         onClick={handleUpload}
         disabled={!selectedFile || uploading}
-        style={{ marginTop: 10 }}
+        style={{ marginTop: 10, marginLeft: 10 }}
       >
-        Upload
+        {uploading ? 'Uploading...' : 'Upload'}
       </Button>
       {uploading && <LinearProgress style={{ marginTop: 10 }} />}
-      <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError("")} message={error} />
+      <Snackbar 
+        open={!!error} 
+        autoHideDuration={6000} 
+        onClose={() => setError("")} 
+        message={error}
+      />
     </div>
   )
 }
