@@ -7,10 +7,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'your-secret-key-here'
 
 # Get ALLOWED_HOSTS from environment variable, with a default fallback
-ALLOWED_HOSTS = os.getenv(
-    'DJANGO_ALLOWED_HOSTS',
-    'localhost,127.0.0.1,secure-file-sharing-app-1.onrender.com,.onrender.com'
-).split(',')
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'secure-file-sharing-app-1.onrender.com',
+    'secure-file-sharing-app-aaif-vert.vercel.app'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,7 +29,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -125,14 +126,19 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-CORS_ALLOW_ALL_ORIGINS = True  # For development only, change this in production
+# CORS Configuration
 CORS_ALLOWED_ORIGINS = [
-    "https://secure-file-sharing-frontend.vercel.app",  # Your Vercel frontend URL
+    "https://secure-file-sharing-app-aaif-vert.vercel.app",  # Your Vercel frontend URL
     "http://localhost:3000",
-    
+    "https://secure-file-sharing-app-1.onrender.com"  # Your Render backend URL
 ]
-CORS_ALLOW_ALL_HEADERS = True
+
+# Additional CORS settings
 CORS_ALLOW_CREDENTIALS = True
+
+# You might need this for development
+CORS_ORIGIN_ALLOW_ALL = True  # Only use this temporarily for debugging
+
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -141,18 +147,8 @@ CORS_ALLOW_METHODS = [
     'POST',
     'PUT',
 ]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-CORS_EXPOSE_HEADERS = ['content-disposition']
+
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 
 LOGGING = {
     'version': 1,
