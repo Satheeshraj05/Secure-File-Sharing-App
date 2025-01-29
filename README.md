@@ -118,8 +118,13 @@ If you'd like to contribute to this project, please follow these steps:
 
 ---
 
-## License
-This project is licensed under the MIT License.
+Login Credentials
+
+Backend & Frontend
+
+Username: user1
+
+Password: Qwertyuiop@123
 
 ---
 
