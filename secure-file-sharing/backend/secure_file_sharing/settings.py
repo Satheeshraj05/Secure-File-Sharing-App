@@ -67,6 +67,7 @@ WSGI_APPLICATION = 'secure_file_sharing.wsgi.application'
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     "https://secure-file-sharing-app-aaif-o2uymm5c6-satheeshrajs-projects.vercel.app",
+    "https://secure-file-sharing-app-aaif-vert.vercel.app",
     "http://localhost:3000",
 ]
 
