@@ -129,6 +129,7 @@ CORS_ALLOW_ALL_ORIGINS = True  # For development only, change this in production
 CORS_ALLOWED_ORIGINS = [
     "https://secure-file-sharing-frontend.vercel.app",  # Your Vercel frontend URL
     "http://localhost:3000",
+    
 ]
 CORS_ALLOW_ALL_HEADERS = True
 CORS_ALLOW_CREDENTIALS = True
@@ -180,5 +181,11 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 # Static files configuration
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Use a simpler storage backend
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'  # Changed from CompressedManifestStaticFilesStorage
+# Add this to ensure Django can find admin static files
+STATICFILES_DIRS = []
+
+# Use the simpler storage backend
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+# Debug setting
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
