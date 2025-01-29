@@ -15,7 +15,7 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = [
     'secure-file-sharing-app-1.onrender.com',
     'secure-file-sharing-backend.onrender.com',
-    'secure-file-sharing-app-aaif-vert.vercel.app',
+    'secure-file-sharing-app-aaif-o2uymm5c6-satheeshrajs-projects.vercel.app',
     'localhost',
     '127.0.0.1',
 ]
@@ -66,7 +66,7 @@ WSGI_APPLICATION = 'secure_file_sharing.wsgi.application'
 
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
-    "https://secure-file-sharing-app-aaif-vert.vercel.app",
+    "https://secure-file-sharing-app-aaif-o2uymm5c6-satheeshrajs-projects.vercel.app",
     "http://localhost:3000",
 ]
 
